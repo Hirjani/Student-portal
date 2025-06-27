@@ -1,0 +1,66 @@
+header {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.bg-internshala-blue {
+  background: linear-gradient(135deg, #004a99 0%, #003d7a 100%);
+}
+
+.link-terms {
+  font-size: 0.875rem;
+  color: #dbe4ff;
+}
+.link-terms a {
+  color: white;
+  text-decoration: underline;
+}
+
+h1 {
+  color: #007bff;
+}
+
+nav button {
+  margin-left: 10px;
+}
+
+.internships {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.filter-buttons {
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.filter-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
