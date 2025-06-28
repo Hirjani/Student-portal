@@ -23,9 +23,9 @@ const Home = () => {
             <input
               type="text"
               placeholder="Search"
-              className="border border-gray-300 rounded-full pl-10 pr-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="header-search border border-gray-300 rounded-full pl-10 pr-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <svg
+            {/* <svg
               className="w-4 h-4 absolute left-3 top-2.5 text-gray-400"
               fill="none"
               stroke="currentColor"
@@ -49,45 +49,55 @@ const Home = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               ></line>
-            </svg>
+            </svg> */}
           </div>
-          <Link to="/login">
-            <button className="text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
+          <Link to="./Login">
+            <button className="header-login text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
               Login
             </button>
           </Link>
-          <Link to="/register">
-            <button className="bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
+          <Link to="./signup">
+            <button className="header-signup bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
               Register
             </button>
           </Link>
-          <a href="#" className="text-blue-500 font-medium hover:underline">
+
+          <Link
+            to="/students"
+            className="header-for-students text-blue-500 font-medium hover:underline"
+          >
             For Students →
-          </a>
+          </Link>
         </div>
       </header>
 
       <main className="bg-internshala-blue flex md:flex-row flex-col items-center justify-between px-10 py-16 text-white relative overflow-hidden">
         <div className="max-w-lg space-y-6">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-            Platform to <span className="text-yellow-400">Connect </span>{" "}
+            Platform to <br /> <span className="text-yellow-400">Connect </span>{" "}
             Students & Companies
           </h1>
+          <br />
           <p className="text-lg">Discover your dream internship</p>
+          <br />
 
           <div className="flex flex-col md:flex-row gap-4 mt-6">
-            <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-              Log In
-            </button>
-            <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-              Sign Up
-            </button>
+            <Link to="./Login">
+              <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                Log In
+              </button>
+            </Link>
+            <Link to="./signup">
+              <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </main>
 
       <footer className="footer">
-        <div id="social_media_container">
+        {/* <div id="social_media_container">
           <a
             className="social_media_link_footer"
             href="#"
@@ -120,7 +130,7 @@ const Home = () => {
           >
             <i className="ic-24-linkedin"></i>
           </a>
-        </div>
+        </div> */}
         <div id="copyright">© Copyright 2025 Internshala</div>
         <div className="clear"></div>
       </footer>

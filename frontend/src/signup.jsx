@@ -5,12 +5,12 @@ const Signup = () => {
   const [First_name, setFirstName] = React.useState("");
   const [Last_name, setLastName] = React.useState("");
   const [username, setUsername] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [resume, setResume] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [dob, setDob] = React.useState("");
-  const [branch, setBranch] = React.useState("");
-  const [roll, setRoll] = React.useState("");
+//   const [city, setCity] = React.useState("");
+//   const [resume, setResume] = React.useState("");
+//   const [gender, setGender] = React.useState("");
+//   const [dob, setDob] = React.useState("");
+//   const [branch, setBranch] = React.useState("");
+//   const [roll, setRoll] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -25,14 +25,14 @@ const Signup = () => {
     const userData = {
       First_name,
       Last_name,
-      username,
+    //   username,
       email,
-      city,
-      resume,
-      gender,
-      dob,
-      branch,
-      roll,
+    //   city,
+    //   resume,
+    //   gender,
+    //   dob,
+    //   branch,
+    //   roll,
       password,
     };
     console.log("User Data:", userData);
@@ -66,7 +66,7 @@ const Signup = () => {
                 value={Last_name}
               />
             </div>
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <label htmlFor="username">Username</label>
               <input
                 type="text"
@@ -142,7 +142,7 @@ const Signup = () => {
                 onChange={(e) => setRoll(e.target.value)}
                 value={roll}
               />
-            </div>
+            </div> */}
             <div className={styles.inputGroup}>
               <label htmlFor="email">Email</label>
               <input
