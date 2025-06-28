@@ -51,12 +51,12 @@ const Home = () => {
               ></line>
             </svg> */}
           </div>
-          <Link to="/Login">
+          <Link to="./Login">
             <button className="header-login text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
               Login
             </button>
           </Link>
-          <Link to="/signup">
+          <Link to="./signup">
             <button className="header-signup bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
               Register
             </button>
@@ -82,12 +82,16 @@ const Home = () => {
           <br />
 
           <div className="flex flex-col md:flex-row gap-4 mt-6">
-            <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-              Log In
-            </button>
-            <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-              Sign Up
-            </button>
+            <Link to="./Login">
+              <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                Log In
+              </button>
+            </Link>
+            <Link to="./signup">
+              <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </main>
