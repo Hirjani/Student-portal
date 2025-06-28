@@ -2,6 +2,20 @@ import React from "react";
 import styles from "./Login.module.css";
 
 const Login = () => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Handle login logic here
+    
+    const userData = {
+      email: email, 
+      password: password,
+    };
+  };
+
+  // You can send userData to your backend for authentication
   return (
     <div className="h-screen bg-blue-300 flex justify-center items-center">
       <div className={styles["login-container"]}>
@@ -15,6 +29,8 @@ const Login = () => {
                 id="email"
                 placeholder="Enter your Username"
                 required
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
             </div>
             <div className={styles["input-group"]}>
@@ -24,6 +40,8 @@ const Login = () => {
                 id="password"
                 placeholder="Enter your password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
             </div>
             <button className={styles.button} type="submit">
