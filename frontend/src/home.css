@@ -6,8 +6,33 @@ header {
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.header-search {
+  margin: 5px 10px 0 0;
+  padding: 10px 15px;
+}
+
+.header-login{
+  margin: 10px 10px 0 0;
+  padding: 10px 15px;
+  background: #2196F3;
+}
+
+.header-signup {
+  margin: 10px 10px 0 10px;
+  padding: 10px 15px;
+   background: #2196F3;
+}
+
+.header-for-students {
+  margin: 10px 10px 0 0;
+  padding: 10px 15px;
+}
+
 .bg-internshala-blue {
-  background: linear-gradient(135deg, #004a99 0%, #003d7a 100%);
+  background: #2930B3;
+  padding : 50px 0 50px 50px;
+  width: 100%;
 }
 
 .link-terms {
@@ -20,11 +45,17 @@ header {
 }
 
 h1 {
-  color: #007bff;
+  color: white;
+  weight: 100;
 }
 
 nav button {
   margin-left: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
 }
 
 .internships {
