@@ -56,7 +56,7 @@ const Home = () => {
               Login
             </button>
           </Link>
-          <Link to="/register">
+          <Link to="/signup">
             <button className="bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
               Register
             </button>

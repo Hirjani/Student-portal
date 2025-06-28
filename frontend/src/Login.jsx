@@ -48,7 +48,7 @@ const Login = () => {
               Login
             </button>
             <p className={styles["signup-link"]}>
-              Don't have an account? <a href="/sign-up">Sign up</a>
+              Don't have an account? <a href="/signup">Sign up</a>
             </p>
           </form>
         </div>
