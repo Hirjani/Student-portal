@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./signup.module.css";
+import axios from "axios";
 
 const Signup = () => {
   const [First_name, setFirstName] = React.useState("");
@@ -17,6 +18,21 @@ const Signup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+    axios
+      .post("http://localhost:5074/signup", {
+        First_name,
+        Last_name,
+        username,
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log("Signup successful:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error during signup:", error);
+      });
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
