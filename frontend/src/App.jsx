@@ -5,15 +5,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //  import "./App.css";
 
 function App() {
+  console.log("App component rendered");
   return (
-
-     <Router>
-       <Routes>
-         <Route path="/" element={<Home />} />
-         <Route path="/login" element={<Login />} />
-       </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </Router>
-
   );
 }
 
