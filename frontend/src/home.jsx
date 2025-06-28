@@ -51,7 +51,7 @@ const Home = () => {
               ></line>
             </svg> */}
           </div>
-          <Link to="/login">
+          <Link to="/Login">
             <button className="header-login text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
               Login
             </button>
