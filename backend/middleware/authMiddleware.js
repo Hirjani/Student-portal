@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const isLoggedIn = async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
   let token = null;
 
   if (
@@ -28,10 +28,4 @@ const isLoggedIn = async (req, res, next) => {
       message: "Not authorized, no token",
     });
   }
-};
-module.exports = {
-  isLoggedIn,
-  isAdmin,
-  isCompany,
-  isStudent,
 };

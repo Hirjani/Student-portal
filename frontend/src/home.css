@@ -12,16 +12,16 @@ header {
   padding: 10px 15px;
 }
 
-.header-login{
+.header-login {
   margin: 10px 10px 0 0;
   padding: 10px 15px;
-  background: #2196F3;
+  background: #2196f3;
 }
 
 .header-signup {
   margin: 10px 10px 0 10px;
   padding: 10px 15px;
-   background: #2196F3;
+  background: #2196f3;
 }
 
 .header-for-students {
@@ -30,8 +30,8 @@ header {
 }
 
 .bg-internshala-blue {
-  background: #2930B3;
-  padding : 50px 0 50px 50px;
+  background: #2930b3;
+  padding: 50px 0 50px 50px;
   width: 100%;
 }
 
@@ -42,10 +42,6 @@ header {
 .link-terms a {
   color: white;
   text-decoration: underline;
-}
-
-h1 {
-  color: white;
 }
 
 nav button {

@@ -15,23 +15,16 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      trim: true,
-    },
     role: {
       type: String,
       enum: ["admin", "company", "student"],
       required: true,
     },
-    photo: {
-      type: String,
-      default: "https://example.com/default-photo.png",
+
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      refPath: "role", // Reference to the profile based on the role
+      required: false,
     },
   },
   {

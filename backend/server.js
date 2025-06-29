@@ -15,13 +15,19 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Body parser for JSON data
 
+app.use((req, res, next) => {
+  // Middleware to log requests (optional)
+  console.log(`${req.method} request for '${req.url}'`);
+  next();
+});
+
 // Import routes
 const authRoutes = require("./routes/authRouter");
-// const internshipRoutes = require("./routes/internship");
+const userRoutes = require("./routes/userRouter");
 
 // // Use routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/internships", internshipRoutes);
+app.use("/api/user", userRoutes);
 
 // Simple root route
 app.get("/", (req, res) => {

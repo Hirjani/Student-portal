@@ -1,57 +1,60 @@
-import React from "react";
+import { useState } from "react";
 import styles from "./signup.module.css";
-import axios from "axios";
-
+import axiosInstance from "./axios/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import { errorToast, successToast } from "./lib/toast";
+import { useAuth } from "./hooks/useAuth";
 const Signup = () => {
-  const [First_name, setFirstName] = React.useState("");
-  const [Last_name, setLastName] = React.useState("");
-  const [username, setUsername] = React.useState("");
-//   const [city, setCity] = React.useState("");
-//   const [resume, setResume] = React.useState("");
-//   const [gender, setGender] = React.useState("");
-//   const [dob, setDob] = React.useState("");
-//   const [branch, setBranch] = React.useState("");
-//   const [roll, setRoll] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const navigate = useNavigate();
+  const [First_name, setFirstName] = useState("");
+  const [Last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLodging, setIsLoading] = useState(false);
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:5074/signup", {
-        First_name,
-        Last_name,
-        username,
-        email,
-        password,
-      })
-      .then((response) => {
-        console.log("Signup successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error during signup:", error);
-      });
+  const { updateData } = useAuth();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+  const handleSignup = async (e) => {
+    try {
+      e.preventDefault();
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      setIsLoading(true);
+      const userData = {
+        firstName: First_name,
+        lastName: Last_name,
+        email: email,
+        password: password,
+        role: "student",
+      };
+
+      const res = await axiosInstance.post("/api/auth/signup", userData);
+
+      if (res.status === 201) {
+        setIsLoading(false);
+        localStorage.setItem("token", res.data.token);
+        updateData(res.data.token, {
+          _id: res.data._id,
+          email: res.data.email,
+          firstName: res.data.firstName,
+          lastName: res.data.lastName,
+          role: res.data.role,
+        });
+        successToast("Signup successful!");
+        navigate("/");
+      } else {
+        setIsLoading(false);
+        errorToast(res.data.message || "Signup failed. Please try again.");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Signup error:", error);
     }
-
-    const userData = {
-      First_name,
-      Last_name,
-    //   username,
-      email,
-    //   city,
-    //   resume,
-    //   gender,
-    //   dob,
-    //   branch,
-    //   roll,
-      password,
-    };
-    console.log("User Data:", userData);
   };
 
   return (
@@ -192,8 +195,8 @@ const Signup = () => {
                 value={confirmPassword}
               />
             </div>
-            <button className={styles.button} type="submit">
-              Sign Up
+            <button className={styles.button} disabled={isLodging}>
+              {isLodging ? "Loading..." : "Sign Up"}
             </button>
             <p className={styles.loginLink}>
               Already have an account? <a href="/login">Login</a>

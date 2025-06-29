@@ -2,8 +2,10 @@
 import React from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "./hooks/useAuth";
 
 const Home = () => {
+  const { user, token, loading } = useAuth();
   return (
     <div className="bg-white">
       <header className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
@@ -51,23 +53,29 @@ const Home = () => {
               ></line>
             </svg> */}
           </div>
-          <Link to="./Login">
-            <button className="header-login text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
-              Login
-            </button>
-          </Link>
-          <Link to="./signup">
-            <button className="header-signup bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
-              Register
-            </button>
-          </Link>
+          {!user ? (
+            <>
+              <Link to="./Login">
+                <button className="header-login text-blue-600 font-semibold border border-blue-600 rounded px-4 py-1 hover:bg-blue-50">
+                  Login
+                </button>
+              </Link>
+              <Link to="./signup">
+                <button className="header-signup bg-blue-500 text-white font-semibold rounded px-5 py-1 hover:bg-blue-600">
+                  Register
+                </button>
+              </Link>
+            </>
+          ) : null}
 
-          <Link
-            to="/students"
-            className="header-for-students text-blue-500 font-medium hover:underline"
-          >
-            For Students →
-          </Link>
+          {user?.role === "student" ? (
+            <Link
+              to="/student/profile"
+              className="header-for-students text-blue-500 font-medium hover:underline"
+            >
+              For Students →
+            </Link>
+          ) : null}
         </div>
       </header>
 
@@ -81,18 +89,20 @@ const Home = () => {
           <p className="text-lg">Discover your dream internship</p>
           <br />
 
-          <div className="flex flex-col md:flex-row gap-4 mt-6">
-            <Link to="./Login">
-              <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-                Log In
-              </button>
-            </Link>
-            <Link to="./signup">
-              <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
-                Sign Up
-              </button>
-            </Link>
-          </div>
+          {!token && !user ? (
+            <div className="flex flex-col md:flex-row gap-4 mt-6">
+              <Link to="./Login">
+                <button className="btn-google flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                  Log In
+                </button>
+              </Link>
+              <Link to="./signup">
+                <button className="btn-email flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                  Sign Up
+                </button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </main>
 
