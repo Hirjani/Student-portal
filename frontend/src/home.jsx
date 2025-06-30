@@ -9,10 +9,10 @@ const Home = () => {
   const { user, token, loading } = useAuth();
   return (
     <div className="bg-white">
-      <main className=" bg-teal-300 flex md:flex-row flex-col items-center justify-between px-10 py-16 text-white relative overflow-hidden">
+      <main className=" bg-blue-500 flex md:flex-row flex-col items-center justify-between px-10 py-16 text-white relative overflow-hidden">
         <div className="max-w-lg space-y-6">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-            Platform to <br /> <span className="text-red-500">Connect </span>{" "}
+            Platform to <br /> <span className="text-yellow-500">Connect </span>{" "}
             Students & Companies
           </h1>
           <br />
@@ -22,12 +22,12 @@ const Home = () => {
           {!token && !user ? (
             <div className="flex flex-col md:flex-row gap-4 mt-6">
               <Link to="/login">
-                <button className=" bg-red-500 flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                <button className=" bg-white text-blue-700 flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
                   Log In
                 </button>
               </Link>
               <Link to="/signup">
-                <button className=" bg-red-500 flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
+                <button className=" bg-white text-blue-700 flex items-center justify-center rounded-md px-6 py-3 shadow-md hover:shadow-lg transition duration-300">
                   Sign Up
                 </button>
               </Link>
