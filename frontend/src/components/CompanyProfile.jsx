@@ -9,6 +9,8 @@ const CompanyProfile = () => {
     companyWebsite: "",
     companyLogoUrl: "",
     headquarters: "",
+    companyPhone: "",
+    companyEmail: "",
   };
   const [formData, setFormData] = useState(formDataInitialState);
 
@@ -53,6 +55,8 @@ const CompanyProfile = () => {
             companyWebsite: res.data.companyWebsite || "",
             companyLogoUrl: res.data.companyLogoUrl || "",
             headquarters: res.data.headquarters || "",
+            companyPhone: res.data.companyPhone || "",
+            companyEmail: res.data.companyEmail || "",
           });
         } else {
           console.error("Error fetching profile:", res.data);
@@ -198,6 +202,54 @@ const CompanyProfile = () => {
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                   placeholder="City, State, Country"
+                />
+              </div>
+            </div>
+
+            {/* Company Phone */}
+            <div>
+              <label
+                htmlFor="companyPhone"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Company Phone
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 text-sm">📞</span>
+                </div>
+                <input
+                  type="tel"
+                  id="companyPhone"
+                  name="companyPhone"
+                  value={formData.companyPhone}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+            </div>
+
+            {/* Company Email */}
+            <div>
+              <label
+                htmlFor="companyEmail"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Company Email
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 text-sm">📧</span>
+                </div>
+                <input
+                  type="email"
+                  id="companyEmail"
+                  name="companyEmail"
+                  value={formData.companyEmail}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                  placeholder="contact@yourcompany.com"
                 />
               </div>
             </div>

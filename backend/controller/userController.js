@@ -201,7 +201,7 @@ exports.getCompanyProfileById = async (req, res) => {
     const companyId = req.query.id;
     const companyProfile = await CompanyProfile.findById(companyId).populate(
       "user",
-      "firstName lastName email"
+      "email phone"
     );
 
     if (!companyProfile) {

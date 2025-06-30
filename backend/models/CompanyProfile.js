@@ -9,6 +9,16 @@ const companyProfileSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+
+    companyEmail: {
+      type: String,
+      lowercase: true,
+      trim: true,
+    },
+    companyPhone: {
+      type: String,
+      trim: true,
+    },
     companyName: {
       type: String,
       unique: true,

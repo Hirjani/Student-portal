@@ -181,6 +181,40 @@ const CompanyProfileDisplay = () => {
                 <p className="text-gray-600 text-lg">Not specified</p>
               )}
             </div>
+            {/* Company Phone Card */}
+
+            <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6">
+              <div className="flex items-center space-x-3 mb-2">
+                <span className="text-2xl">📞</span>
+                <h3 className="text-lg font-semibold text-gray-800">Phone</h3>
+              </div>
+              {companyData.companyPhone ? (
+                <a
+                  href={`tel:${companyData.companyPhone}`}
+                  className="text-teal-600 hover:text-teal-800 text-lg underline transition-colors duration-200"
+                >
+                  {companyData.companyPhone}
+                </a>
+              ) : (
+                <p className="text-gray-600 text-lg">Not specified</p>
+              )}
+            </div>
+            <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6">
+              <div className="flex items-center space-x-3 mb-2">
+                <span className="text-2xl">📧</span>
+                <h3 className="text-lg font-semibold text-gray-800">Phone</h3>
+              </div>
+              {companyData.companyEmail ? (
+                <a
+                  href={`tel:${companyData.companyEmail}`}
+                  className="text-teal-600 hover:text-teal-800 text-lg underline transition-colors duration-200"
+                >
+                  {companyData.companyEmail}
+                </a>
+              ) : (
+                <p className="text-gray-600 text-lg">Not specified</p>
+              )}
+            </div>
 
             {/* Founded Date (if you add this field later) */}
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">

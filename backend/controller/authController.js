@@ -85,7 +85,11 @@ exports.signUp = async (req, res) => {
     if (role === "student") {
       userProfile = new studentProfile({ user: user._id, firstName, lastName });
     } else if (role === "company") {
-      userProfile = new companyProfile({ user: user._id, companyName });
+      userProfile = new companyProfile({
+        user: user._id,
+        companyName,
+        companyEmail: email,
+      });
     } else {
       userProfile = null;
     }
