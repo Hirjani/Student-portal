@@ -21,9 +21,9 @@ function Navbar() {
           >
             Companies
           </Link>
-          <Link to="/jobs" className="hover:text-blue-500 transition-colors">
+          {/* <Link to="/jobs" className="hover:text-blue-500 transition-colors">
             Jobs
-          </Link>
+          </Link> */}
         </nav>
       </div>
 

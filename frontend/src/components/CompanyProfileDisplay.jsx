@@ -202,7 +202,7 @@ const CompanyProfileDisplay = () => {
             <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6">
               <div className="flex items-center space-x-3 mb-2">
                 <span className="text-2xl">📧</span>
-                <h3 className="text-lg font-semibold text-gray-800">Phone</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Email</h3>
               </div>
               {companyData.companyEmail ? (
                 <a
