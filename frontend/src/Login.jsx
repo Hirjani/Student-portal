@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Login.module.css";
 import { errorToast, successToast } from "./lib/toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
@@ -44,18 +43,28 @@ const Login = () => {
       }
     } catch (error) {
       setIsLoading(false);
+      errorToast(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
       console.error("Login error:", error);
     }
   };
 
   return (
     <div className="h-screen bg-blue-300 flex justify-center items-center">
-      <div className={styles["login-container"]}>
-        <div className={styles["login-box"]}>
-          <h2 className={styles.h2}>Login</h2>
+      <div className="w-full max-w-md">
+        <div className="bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+            Login
+          </h2>
           <form onSubmit={handleLogin}>
-            <div className={styles["input-group"]}>
-              <label htmlFor="email">Username</label>
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Username
+              </label>
               <input
                 type="email"
                 id="email"
@@ -63,10 +72,16 @@ const Login = () => {
                 required
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            <div className={styles["input-group"]}>
-              <label htmlFor="password">Password</label>
+            <div className="mb-6">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -74,16 +89,26 @@ const Login = () => {
                 required
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            <button
-              className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
-              type="submit"
-            >
-              Login
-            </button>
-            <p className={styles["signup-link"]}>
-              Don't have an account? <a href="/signup">Sign up</a>
+            <div className="flex justify-between items-center w-full mb-4">
+              <button
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </button>
+            </div>
+            <p className="text-center text-sm text-gray-600">
+              Don't have an account?{" "}
+              <a
+                href="/signup"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Sign up
+              </a>
             </p>
           </form>
         </div>

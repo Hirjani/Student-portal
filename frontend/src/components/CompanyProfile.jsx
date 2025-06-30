@@ -22,25 +22,32 @@ const CompanyProfile = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    const updatedData = {};
-    for (const key in formDataInitialState) {
-      if (formData[key] !== "") {
-        updatedData[key] = formData[key];
+    try {
+      e.preventDefault();
+      console.log("Form submitted:", formData);
+      const updatedData = {};
+      for (const key in formDataInitialState) {
+        if (formData[key] !== "") {
+          updatedData[key] = formData[key];
+        }
       }
-    }
-    const res = await axiosInstance.put(
-      "/api/user/company/profile",
-      updatedData
-    );
+      const res = await axiosInstance.put(
+        "/api/user/company/profile",
+        updatedData
+      );
 
-    if (res.status === 200) {
-      console.log("Profile saved successfully:", res.data);
-      successToast("Profile saved successfully!");
-    } else {
-      console.error("Error saving profile:", res.data);
-      errorToast("Error saving profile. Please try again.");
+      if (res.status === 200) {
+        console.log("Profile saved successfully:", res.data);
+        successToast("Profile saved successfully!");
+      } else {
+        console.error("Error saving profile:", res.data);
+        errorToast("Error saving profile. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error saving company profile:", error);
+      errorToast(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     }
   };
 

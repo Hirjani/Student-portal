@@ -29,9 +29,6 @@ exports.logIn = async (req, res) => {
       userProfile = null;
     }
 
-    console.log("User profile:", userProfile.companyName);
-    console.log("User profile:", userProfile.firstName);
-
     res.status(200).json(
       user.role === "company"
         ? {
