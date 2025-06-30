@@ -30,6 +30,9 @@ router.get(
   authMiddleware.isLoggedIn,
   userController.getCompanyProfile
 );
+router.get("/company/display", userController.getCompanyProfileById);
+router.get("/company/all", userController.getCompanyList);
+router.get("/company/search", userController.getCompanyListBySearch);
 router.put(
   "/company/profile",
   authMiddleware.isLoggedIn,

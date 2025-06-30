@@ -11,13 +11,11 @@ const companyProfileSchema = new mongoose.Schema(
     },
     companyName: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
     companyDescription: {
       type: String,
-      required: true,
       trim: true,
     },
     companyWebsite: {

@@ -34,6 +34,7 @@ const Login = () => {
           firstName: res.data.firstName,
           lastName: res.data.lastName,
           role: res.data.role,
+          companyName: res?.data?.companyName || "",
         });
         successToast("Login successful!");
         navigate("/");
@@ -75,7 +76,10 @@ const Login = () => {
                 value={password}
               />
             </div>
-            <button className={styles.button} type="submit">
+            <button
+              className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
+              type="submit"
+            >
               Login
             </button>
             <p className={styles["signup-link"]}>

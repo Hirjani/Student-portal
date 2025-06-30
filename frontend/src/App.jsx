@@ -8,6 +8,9 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import StudentProfile from "./components/StudentProfile";
 import Navbar from "./components/navbar";
+import CompanyProfile from "./components/CompanyProfile";
+import CompanyProfileDisplay from "./components/CompanyProfileDisplay";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   console.log("App component rendered");
@@ -23,8 +26,15 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Protected Routes */}
-          <Route path="/student/profile" element={<StudentProfile />} />
-          <Route element={<ProtectedRoute role={"student"} />}></Route>
+          <Route element={<ProtectedRoute role={"student"} />}>
+            <Route path="/student/profile" element={<StudentProfile />} />
+          </Route>
+          <Route element={<ProtectedRoute role={"company"} />}>
+            <Route path="/company/profile" element={<CompanyProfile />} />
+          </Route>
+          <Route path="/company/details" element={<CompanyProfileDisplay />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/companies" element={<SearchResults />} />
         </Routes>
       </Router>
     </>

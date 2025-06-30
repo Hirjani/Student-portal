@@ -20,14 +20,38 @@ exports.logIn = async (req, res) => {
     // Generate JWT token
     const token = await generateToken({ id: user._id });
 
-    res.status(200).json({
-      _id: user._id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      role: user.role,
-      token,
-    });
+    let userProfile;
+    if (user.role === "student") {
+      userProfile = await studentProfile.findOne({ user: user._id });
+    } else if (user.role === "company") {
+      userProfile = await companyProfile.findOne({ user: user._id });
+    } else {
+      userProfile = null;
+    }
+
+    console.log("User profile:", userProfile.companyName);
+    console.log("User profile:", userProfile.firstName);
+
+    res.status(200).json(
+      user.role === "company"
+        ? {
+            _id: user._id,
+            email: user.email,
+            companyName: userProfile?.companyName
+              ? userProfile?.companyName
+              : "",
+            role: user.role,
+            token,
+          }
+        : {
+            _id: user._id,
+            email: user.email,
+            firstName: userProfile?.firstName ? userProfile?.firstName : "",
+            lastName: userProfile?.lastName ? userProfile?.lastName : "",
+            role: user.role,
+            token,
+          }
+    );
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server error" });
@@ -41,6 +65,7 @@ exports.signUp = async (req, res) => {
     firstName = "",
     lastName = "",
     role = "student",
+    companyName = "",
   } = req.body;
 
   try {
@@ -60,7 +85,7 @@ exports.signUp = async (req, res) => {
     if (role === "student") {
       userProfile = new studentProfile({ user: user._id, firstName, lastName });
     } else if (role === "company") {
-      userProfile = new companyProfile({ user: user._id });
+      userProfile = new companyProfile({ user: user._id, companyName });
     } else {
       userProfile = null;
     }
@@ -72,14 +97,26 @@ exports.signUp = async (req, res) => {
     await user.save();
     // Generate JWT token
     const token = await generateToken({ id: user._id });
-    res.status(201).json({
-      _id: user._id,
-      email: user.email,
-      firstName: userProfile?.firstName ? userProfile?.firstName : "",
-      lastName: userProfile?.lastName ? userProfile?.lastName : "",
-      role: user.role,
-      token,
-    });
+    res.status(201).json(
+      user.role === "company"
+        ? {
+            _id: user._id,
+            email: user.email,
+            companyName: userProfile?.companyName
+              ? userProfile?.companyName
+              : "",
+            role: user.role,
+            token,
+          }
+        : {
+            _id: user._id,
+            email: user.email,
+            firstName: userProfile?.firstName ? userProfile?.firstName : "",
+            lastName: userProfile?.lastName ? userProfile?.lastName : "",
+            role: user.role,
+            token,
+          }
+    );
   } catch (error) {
     console.error("Sign up error:", error);
     res.status(500).json({ message: "Server error" });

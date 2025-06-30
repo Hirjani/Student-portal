@@ -196,6 +196,25 @@ exports.getCompanyProfile = async (req, res) => {
   }
 };
 
+exports.getCompanyProfileById = async (req, res) => {
+  try {
+    const companyId = req.query.id;
+    const companyProfile = await CompanyProfile.findById(companyId).populate(
+      "user",
+      "firstName lastName email"
+    );
+
+    if (!companyProfile) {
+      return res.status(404).json({ message: "Company profile not found" });
+    }
+
+    res.status(200).json(companyProfile);
+  } catch (error) {
+    console.error("Error fetching company profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 exports.getStudentProfile = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -210,6 +229,40 @@ exports.getStudentProfile = async (req, res) => {
     res.status(200).json(studentProfile);
   } catch (error) {
     console.error("Error fetching student profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+exports.getCompanyList = async (req, res) => {
+  try {
+    const companies = await CompanyProfile.find().populate("user", "email");
+    if (!companies || companies.length === 0) {
+      return res.status(404).json({ message: "No companies found" });
+    }
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching company list:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+exports.getCompanyListBySearch = async (req, res) => {
+  try {
+    const searchQuery = req.query.q;
+    if (!searchQuery) {
+      return res.status(400).json({ message: "Search query is required" });
+    }
+
+    const regex = new RegExp(searchQuery, "i"); // Case-insensitive search
+    const companies = await CompanyProfile.find({
+      companyName: regex,
+    }).populate("user", "email");
+
+    if (!companies || companies.length === 0) {
+      return res.status(404).json({ message: "No companies found" });
+    }
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching company list by search:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
