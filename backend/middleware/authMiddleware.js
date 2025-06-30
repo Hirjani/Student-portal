@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+
 exports.isLoggedIn = async (req, res, next) => {
   let token = null;
 

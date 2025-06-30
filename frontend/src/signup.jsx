@@ -4,47 +4,101 @@ import axiosInstance from "./axios/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "./lib/toast";
 import { useAuth } from "./hooks/useAuth";
+
 const Signup = () => {
   const navigate = useNavigate();
-  const [First_name, setFirstName] = useState("");
-  const [Last_name, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLodging, setIsLoading] = useState(false);
-
   const { updateData } = useAuth();
+
+  // Tab state
+  const [activeTab, setActiveTab] = useState("student"); // "student" or "company"
+
+  // Student form state
+  const [studentData, setStudentData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  // Company form state
+  const [companyData, setCompanyData] = useState({
+    companyName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleStudentChange = (field, value) => {
+    setStudentData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleCompanyChange = (field, value) => {
+    setCompanyData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   const handleSignup = async (e) => {
     try {
       e.preventDefault();
 
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+      const currentData = activeTab === "student" ? studentData : companyData;
+
+      if (currentData.password !== currentData.confirmPassword) {
+        errorToast("Passwords do not match!");
         return;
       }
 
       setIsLoading(true);
-      const userData = {
-        firstName: First_name,
-        lastName: Last_name,
-        email: email,
-        password: password,
-        role: "student",
-      };
+
+      let userData;
+      if (activeTab === "student") {
+        userData = {
+          firstName: studentData.firstName,
+          lastName: studentData.lastName,
+          email: studentData.email,
+          password: studentData.password,
+          role: "student",
+        };
+      } else {
+        userData = {
+          companyName: companyData.companyName,
+          email: companyData.email,
+          password: companyData.password,
+          role: "company",
+        };
+      }
 
       const res = await axiosInstance.post("/api/auth/signup", userData);
 
       if (res.status === 201) {
         setIsLoading(false);
         localStorage.setItem("token", res.data.token);
-        updateData(res.data.token, {
-          _id: res.data._id,
-          email: res.data.email,
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
-          role: res.data.role,
-        });
+
+        if (activeTab === "student") {
+          updateData(res.data.token, {
+            _id: res.data._id,
+            email: res.data.email,
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            role: res.data.role,
+          });
+        } else {
+          updateData(res.data.token, {
+            _id: res.data._id,
+            email: res.data.email,
+            companyName: res.data.companyName,
+            role: res.data.role,
+          });
+        }
+
         successToast("Signup successful!");
         navigate("/");
       } else {
@@ -54,6 +108,9 @@ const Signup = () => {
     } catch (error) {
       setIsLoading(false);
       console.error("Signup error:", error);
+      errorToast(
+        error.response?.data?.message || "An error occurred during signup."
+      );
     }
   };
 
@@ -62,142 +119,175 @@ const Signup = () => {
       <div className={styles.signupContainer}>
         <div className={styles.signupBox}>
           <h2 className={styles.h2}>Sign Up</h2>
-          <form onSubmit={handleSignup}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="first-name">First Name</label>
-              <input
-                type="text"
-                id="first-name"
-                placeholder="Enter your first name"
-                required
-                onChange={(e) => setFirstName(e.target.value)}
-                value={First_name}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="last-name">Last Name</label>
-              <input
-                type="text"
-                id="last-name"
-                placeholder="Enter your last name"
-                required
-                onChange={(e) => setLastName(e.target.value)}
-                value={Last_name}
-              />
-            </div>
-            {/* <div className={styles.inputGroup}>
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                placeholder="Enter your username"
-                required
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="city">City</label>
-              <input
-                type="text"
-                id="city"
-                placeholder="Enter your city"
-                required
-                onChange={(e) => setCity(e.target.value)}
-                value={city}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="resume">Resume</label>
-              <input
-                type="file"
-                id="resume"
-                required
-                onChange={(e) => setResume(e.target.files[0])}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="gender">Gender</label>
-              <select
-                id="gender"
-                required
-                onChange={(e) => setGender(e.target.value)}
-                value={gender}
-              >
-                <option value="">Select your gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="dob">Date of Birth</label>
-              <input
-                type="date"
-                id="dob"
-                required
-                onChange={(e) => setDob(e.target.value)}
-                value={dob}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="branch">Branch</label>
-              <input
-                type="text"
-                id="branch"
-                placeholder="Enter your branch"
-                required
-                onChange={(e) => setBranch(e.target.value)}
-                value={branch}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="roll">Internship Roll</label>
-              <input
-                type="text"
-                id="roll"
-                placeholder="Enter your internship roll"
-                required
-                onChange={(e) => setRoll(e.target.value)}
-                value={roll}
-              />
-            </div> */}
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="confirm-password">Confirm Password</label>
-              <input
-                type="password"
-                id="confirm-password"
-                placeholder="Confirm your password"
-                required
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                value={confirmPassword}
-              />
-            </div>
-            <button className={styles.button} disabled={isLodging}>
-              {isLodging ? "Loading..." : "Sign Up"}
+
+          {/* Tab Bar */}
+          <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab("student")}
+              className={`flex-1 py-2 px-4 rounded-md font-medium text-sm transition-all duration-200 ${
+                activeTab === "student"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
+            >
+              👨‍🎓 Student
             </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("company")}
+              className={`flex-1 py-2 px-4 rounded-md font-medium text-sm transition-all duration-200 ${
+                activeTab === "company"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
+            >
+              🏢 Company
+            </button>
+          </div>
+
+          <form onSubmit={handleSignup}>
+            {/* Student Form */}
+            {activeTab === "student" && (
+              <>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="student-first-name">First Name</label>
+                  <input
+                    type="text"
+                    id="student-first-name"
+                    placeholder="Enter your first name"
+                    required
+                    onChange={(e) =>
+                      handleStudentChange("firstName", e.target.value)
+                    }
+                    value={studentData.firstName}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="student-last-name">Last Name</label>
+                  <input
+                    type="text"
+                    id="student-last-name"
+                    placeholder="Enter your last name"
+                    required
+                    onChange={(e) =>
+                      handleStudentChange("lastName", e.target.value)
+                    }
+                    value={studentData.lastName}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="student-email">Email</label>
+                  <input
+                    type="email"
+                    id="student-email"
+                    placeholder="Enter your email"
+                    required
+                    onChange={(e) =>
+                      handleStudentChange("email", e.target.value)
+                    }
+                    value={studentData.email}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="student-password">Password</label>
+                  <input
+                    type="password"
+                    id="student-password"
+                    placeholder="Enter your password"
+                    required
+                    onChange={(e) =>
+                      handleStudentChange("password", e.target.value)
+                    }
+                    value={studentData.password}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="student-confirm-password">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    id="student-confirm-password"
+                    placeholder="Confirm your password"
+                    required
+                    onChange={(e) =>
+                      handleStudentChange("confirmPassword", e.target.value)
+                    }
+                    value={studentData.confirmPassword}
+                  />
+                </div>
+              </>
+            )}
+
+            {/* Company Form */}
+            {activeTab === "company" && (
+              <>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="company-name">Company Name</label>
+                  <input
+                    type="text"
+                    id="company-name"
+                    placeholder="Enter your company name"
+                    required
+                    onChange={(e) =>
+                      handleCompanyChange("companyName", e.target.value)
+                    }
+                    value={companyData.companyName}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="company-email">Company Email</label>
+                  <input
+                    type="email"
+                    id="company-email"
+                    placeholder="Enter company email"
+                    required
+                    onChange={(e) =>
+                      handleCompanyChange("email", e.target.value)
+                    }
+                    value={companyData.email}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="company-password">Password</label>
+                  <input
+                    type="password"
+                    id="company-password"
+                    placeholder="Enter your password"
+                    required
+                    onChange={(e) =>
+                      handleCompanyChange("password", e.target.value)
+                    }
+                    value={companyData.password}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="company-confirm-password">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    id="company-confirm-password"
+                    placeholder="Confirm your password"
+                    required
+                    onChange={(e) =>
+                      handleCompanyChange("confirmPassword", e.target.value)
+                    }
+                    value={companyData.confirmPassword}
+                  />
+                </div>
+              </>
+            )}
+
+            <button className={styles.button} disabled={isLoading}>
+              {isLoading
+                ? "Creating Account..."
+                : `Sign Up as ${
+                    activeTab === "student" ? "Student" : "Company"
+                  }`}
+            </button>
+
             <p className={styles.loginLink}>
               Already have an account? <a href="/login">Login</a>
             </p>
