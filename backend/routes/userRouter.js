@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controller/userController");
 const authMiddleware = require("../middleware/authMiddleware"); // Assuming you have auth middleware
+const { uploadFiles } = require("../utils/helpers");
 
 // Get user profile
 router.get(
@@ -19,6 +20,7 @@ router.get(
 router.put(
   "/student/profile",
   authMiddleware.isLoggedIn,
+  uploadFiles,
   userController.updateStudentProfile
 );
 

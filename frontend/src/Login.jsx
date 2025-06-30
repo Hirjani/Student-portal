@@ -25,7 +25,7 @@ const Login = () => {
 
       const res = await axiosInstance.post("/api/auth/login", userData);
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         setIsLoading(false);
         localStorage.setItem("token", res.data.token);
         updateData(res.data.token, {

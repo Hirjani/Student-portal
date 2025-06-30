@@ -7,13 +7,16 @@ import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import StudentProfile from "./components/StudentProfile";
+import Navbar from "./components/navbar";
 
 function App() {
   console.log("App component rendered");
   return (
-    <AuthProvider>
-      <ToastContainer />{" "}
+    <>
+      <ToastContainer />
+
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
@@ -24,7 +27,7 @@ function App() {
           <Route element={<ProtectedRoute role={"student"} />}></Route>
         </Routes>
       </Router>
-    </AuthProvider>
+    </>
   );
 }
 

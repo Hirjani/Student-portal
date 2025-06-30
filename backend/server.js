@@ -29,6 +29,8 @@ const userRoutes = require("./routes/userRouter");
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 
+app.use("/uploads", express.static("uploads"));
+
 // Simple root route
 app.get("/", (req, res) => {
   res.send("API is running...");
