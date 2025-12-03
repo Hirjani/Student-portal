@@ -604,7 +604,7 @@ const StudentProfileForm = () => {
           ))}
         </section>
 
-        {/* Work Experience */}
+        {/* Work Experience
         <section className="bg-gray-50 p-6 rounded-lg">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-gray-700">
@@ -728,6 +728,7 @@ const StudentProfileForm = () => {
             </div>
           ))}
         </section>
+         */}
 
         {/* Extra Curricular Activities */}
         <section className="bg-gray-50 p-6 rounded-lg">
