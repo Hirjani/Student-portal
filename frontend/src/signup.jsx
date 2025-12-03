@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "./signup.module.css";
 import axiosInstance from "./axios/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "./lib/toast";
@@ -115,10 +114,12 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-300 overflow-y-auto flex justify-center items-start py-10 px-4">
-      <div className={styles.signupContainer}>
-        <div className={styles.signupBox}>
-          <h2 className={styles.h2}>Sign Up</h2>
+    <div className="min-h-[calc(100vh-64px)] bg-blue-300 flex justify-center items-center py-10 px-4">
+      <div className="w-full max-w-md">
+        <div className="bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+            Sign Up
+          </h2>
 
           {/* Tab Bar */}
           <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
@@ -150,8 +151,13 @@ const Signup = () => {
             {/* Student Form */}
             {activeTab === "student" && (
               <>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="student-first-name">First Name</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="student-first-name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    First Name
+                  </label>
                   <input
                     type="text"
                     id="student-first-name"
@@ -161,10 +167,16 @@ const Signup = () => {
                       handleStudentChange("firstName", e.target.value)
                     }
                     value={studentData.firstName}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="student-last-name">Last Name</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="student-last-name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Last Name
+                  </label>
                   <input
                     type="text"
                     id="student-last-name"
@@ -174,10 +186,16 @@ const Signup = () => {
                       handleStudentChange("lastName", e.target.value)
                     }
                     value={studentData.lastName}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="student-email">Email</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="student-email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Email
+                  </label>
                   <input
                     type="email"
                     id="student-email"
@@ -187,10 +205,16 @@ const Signup = () => {
                       handleStudentChange("email", e.target.value)
                     }
                     value={studentData.email}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="student-password">Password</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="student-password"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Password
+                  </label>
                   <input
                     type="password"
                     id="student-password"
@@ -200,10 +224,14 @@ const Signup = () => {
                       handleStudentChange("password", e.target.value)
                     }
                     value={studentData.password}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="student-confirm-password">
+                <div className="mb-6">
+                  <label
+                    htmlFor="student-confirm-password"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Confirm Password
                   </label>
                   <input
@@ -215,6 +243,7 @@ const Signup = () => {
                       handleStudentChange("confirmPassword", e.target.value)
                     }
                     value={studentData.confirmPassword}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </>
@@ -223,8 +252,13 @@ const Signup = () => {
             {/* Company Form */}
             {activeTab === "company" && (
               <>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="company-name">Company Name</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="company-name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Company Name
+                  </label>
                   <input
                     type="text"
                     id="company-name"
@@ -234,10 +268,16 @@ const Signup = () => {
                       handleCompanyChange("companyName", e.target.value)
                     }
                     value={companyData.companyName}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="company-email">Company Email</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="company-email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Company Email
+                  </label>
                   <input
                     type="email"
                     id="company-email"
@@ -247,10 +287,16 @@ const Signup = () => {
                       handleCompanyChange("email", e.target.value)
                     }
                     value={companyData.email}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="company-password">Password</label>
+                <div className="mb-4">
+                  <label
+                    htmlFor="company-password"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Password
+                  </label>
                   <input
                     type="password"
                     id="company-password"
@@ -260,10 +306,14 @@ const Signup = () => {
                       handleCompanyChange("password", e.target.value)
                     }
                     value={companyData.password}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="company-confirm-password">
+                <div className="mb-6">
+                  <label
+                    htmlFor="company-confirm-password"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Confirm Password
                   </label>
                   <input
@@ -275,12 +325,16 @@ const Signup = () => {
                       handleCompanyChange("confirmPassword", e.target.value)
                     }
                     value={companyData.confirmPassword}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </>
             )}
 
-            <button className={styles.button} disabled={isLoading}>
+            <button
+              className="w-full px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 mb-4"
+              disabled={isLoading}
+            >
               {isLoading
                 ? "Creating Account..."
                 : `Sign Up as ${
@@ -288,8 +342,14 @@ const Signup = () => {
                   }`}
             </button>
 
-            <p className={styles.loginLink}>
-              Already have an account? <a href="/login">Login</a>
+            <p className="text-center text-sm text-gray-600">
+              Already have an account?{" "}
+              <a
+                href="/login"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Login
+              </a>
             </p>
           </form>
         </div>
