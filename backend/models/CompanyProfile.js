@@ -40,6 +40,17 @@ const companyProfileSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    foundedDate: {
+      type: Date,
+    },
+    numberOfEmployees: {
+      type: Number,
+      min: 0,
+    },
+    industry: {
+      type: String,
+      trim: true,
+    },
   },
   {
     timestamps: true,

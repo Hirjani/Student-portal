@@ -11,6 +11,9 @@ const CompanyProfile = () => {
     headquarters: "",
     companyPhone: "",
     companyEmail: "",
+    foundedDate: "",
+    numberOfEmployees: "",
+    industry: "",
   };
   const [formData, setFormData] = useState(formDataInitialState);
 
@@ -64,6 +67,11 @@ const CompanyProfile = () => {
             headquarters: res.data.headquarters || "",
             companyPhone: res.data.companyPhone || "",
             companyEmail: res.data.companyEmail || "",
+            foundedDate: res.data.foundedDate
+              ? res.data.foundedDate.split("T")[0]
+              : "",
+            numberOfEmployees: res.data.numberOfEmployees || "",
+            industry: res.data.industry || "",
           });
         } else {
           console.error("Error fetching profile:", res.data);
@@ -257,6 +265,78 @@ const CompanyProfile = () => {
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
                   placeholder="contact@yourcompany.com"
+                />
+              </div>
+            </div>
+
+            {/* Founded Date */}
+            <div>
+              <label
+                htmlFor="foundedDate"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Founded Date
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 text-sm">📅</span>
+                </div>
+                <input
+                  type="date"
+                  id="foundedDate"
+                  name="foundedDate"
+                  value={formData.foundedDate}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Number of Employees */}
+            <div>
+              <label
+                htmlFor="numberOfEmployees"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Number of Employees
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 text-sm">👥</span>
+                </div>
+                <input
+                  type="number"
+                  id="numberOfEmployees"
+                  name="numberOfEmployees"
+                  value={formData.numberOfEmployees}
+                  onChange={handleChange}
+                  min="0"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                  placeholder="e.g., 150"
+                />
+              </div>
+            </div>
+
+            {/* Industry */}
+            <div>
+              <label
+                htmlFor="industry"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Industry
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 text-sm">🏭</span>
+                </div>
+                <input
+                  type="text"
+                  id="industry"
+                  name="industry"
+                  value={formData.industry}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                  placeholder="e.g., Technology, Healthcare, Finance"
                 />
               </div>
             </div>

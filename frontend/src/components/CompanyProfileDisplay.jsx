@@ -33,6 +33,18 @@ const CompanyProfileDisplay = () => {
     fetchCompanyProfile();
   }, []);
 
+  // Helper function to get company size range from employee count
+  const getCompanySize = (employees) => {
+    if (!employees) return null;
+    if (employees <= 10) return "1-10";
+    if (employees <= 50) return "11-50";
+    if (employees <= 200) return "51-200";
+    if (employees <= 500) return "201-500";
+    if (employees <= 1000) return "501-1000";
+    if (employees <= 5000) return "1001-5000";
+    return "5000+";
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
@@ -216,7 +228,61 @@ const CompanyProfileDisplay = () => {
               )}
             </div>
 
-            {/* Founded Date (if you add this field later) */}
+            {/* Founded Date Card */}
+            {companyData.foundedDate && (
+              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6">
+                <div className="flex items-center space-x-3 mb-2">
+                  <span className="text-2xl">📅</span>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    Founded
+                  </h3>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  {new Date(companyData.foundedDate).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
+                </p>
+              </div>
+            )}
+
+            {/* Number of Employees Card */}
+            {companyData.numberOfEmployees && (
+              <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-6">
+                <div className="flex items-center space-x-3 mb-2">
+                  <span className="text-2xl">👥</span>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    Employees
+                  </h3>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  {companyData.numberOfEmployees.toLocaleString()} employees
+                </p>
+                <p className="text-gray-500 text-sm mt-1">
+                  Company Size: {getCompanySize(companyData.numberOfEmployees)}{" "}
+                  employees
+                </p>
+              </div>
+            )}
+
+            {/* Industry Card */}
+            {companyData.industry && (
+              <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6">
+                <div className="flex items-center space-x-3 mb-2">
+                  <span className="text-2xl">🏭</span>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    Industry
+                  </h3>
+                </div>
+                <p className="text-gray-600 text-lg">{companyData.industry}</p>
+              </div>
+            )}
+
+            {/* Profile Created Card */}
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
               <div className="flex items-center space-x-3 mb-2">
                 <span className="text-2xl">📅</span>

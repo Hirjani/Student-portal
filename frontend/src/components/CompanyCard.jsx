@@ -8,6 +8,18 @@ const CompanyCard = ({ companyData }) => {
     navigate(`/company/details?id=${companyData._id}`);
   };
 
+  // Helper function to get company size range
+  const getCompanySize = (employees) => {
+    if (!employees) return null;
+    if (employees <= 10) return "1-10";
+    if (employees <= 50) return "11-50";
+    if (employees <= 200) return "51-200";
+    if (employees <= 500) return "201-500";
+    if (employees <= 1000) return "501-1000";
+    if (employees <= 5000) return "1001-5000";
+    return "5000+";
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden max-w-sm">
       {/* Header with Logo and Basic Info */}
@@ -65,6 +77,22 @@ const CompanyCard = ({ companyData }) => {
 
         {/* Quick Info */}
         <div className="space-y-2 mb-4">
+          {companyData.industry && (
+            <div className="flex items-center text-sm text-gray-500">
+              <span className="mr-2">🏭</span>
+              <span className="truncate">{companyData.industry}</span>
+            </div>
+          )}
+
+          {companyData.numberOfEmployees && (
+            <div className="flex items-center text-sm text-gray-500">
+              <span className="mr-2">👥</span>
+              <span>
+                {getCompanySize(companyData.numberOfEmployees)} employees
+              </span>
+            </div>
+          )}
+
           {companyData.companyWebsite && (
             <div className="flex items-center text-sm text-gray-500">
               <span className="mr-2">🌐</span>
