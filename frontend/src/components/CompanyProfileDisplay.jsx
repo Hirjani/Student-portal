@@ -101,7 +101,7 @@ const CompanyProfileDisplay = () => {
                     href={companyData.companyWebsite}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-200 px-4 py-2 rounded-lg text-white"
+                    className="inline-flex items-center space-x-2 bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-200 px-4 py-2 rounded-lg text-blue-900 font-medium"
                   >
                     <span>🌐</span>
                     <span>Visit Website</span>
@@ -206,7 +206,7 @@ const CompanyProfileDisplay = () => {
               </div>
               {companyData.companyEmail ? (
                 <a
-                  href={`tel:${companyData.companyEmail}`}
+                  href={`mailto:${companyData.companyEmail}`}
                   className="text-teal-600 hover:text-teal-800 text-lg underline transition-colors duration-200"
                 >
                   {companyData.companyEmail}
